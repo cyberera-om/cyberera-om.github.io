@@ -33,7 +33,7 @@ export function About() {
   const orbA = useScrollParallax({ distance: 110 })
   const orbB = useScrollParallax({ distance: 70 })
   return (
-    <section id="about" className="relative py-20 sm:py-24">
+    <section id="about" className="relative py-20 sm:py-24 overflow-x-hidden">
       <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(1000px_circle_at_80%_20%,rgba(249,115,22,0.10),transparent_60%)]" />
 
       {/* Extra parallax accents */}
@@ -64,7 +64,7 @@ export function About() {
         <SectionHeading
           eyebrow="ABOUT CYRA"
           title="Security. Skills. Delivery."
-          description="We help organization reduce risk, train talent, and ship secure digital products—fast, practical, and measurable."
+          description="We help organization reduce risk, train talent, and ship secure digital products fast, practical, and measurable."
         />
 
         <div className="mt-12 grid gap-3 md:grid-cols-2">

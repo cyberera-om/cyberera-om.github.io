@@ -109,6 +109,13 @@
     overflow-x: hidden !important;
   }
 
+  /* Hard guarantee: never render a horizontal scrollbar (OverlayScrollbars). */
+  .app-scroll .os-scrollbar-horizontal,
+  .app-scroll .os-scrollbar.os-scrollbar-horizontal {
+    display: none !important;
+    height: 0 !important;
+  }
+
   ::selection {
     background: rgba(249, 115, 22, 0.35);
   }

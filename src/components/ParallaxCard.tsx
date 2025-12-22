@@ -40,7 +40,7 @@ export function ParallaxCard({
       {!reduce ? (
         <motion.div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 rounded-inherit"
+          className="pointer-events-none absolute inset-0 rounded-[inherit]"
           style={{
             background:
               'radial-gradient(420px circle at var(--gx) var(--gy), rgba(255,255,255,0.12), transparent 55%)',

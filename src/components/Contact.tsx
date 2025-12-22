@@ -57,7 +57,7 @@ export function Contact() {
   }, [email, message, name])
 
   return (
-    <section id="contact" className="relative py-20 sm:py-24">
+    <section id="contact" className="relative py-20 sm:py-24 overflow-x-hidden">
       <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(1000px_circle_at_20%_10%,rgba(255,255,255,0.06),transparent_60%)]" />
 
       <div className="pointer-events-none absolute inset-0 -z-10" ref={orb.ref as unknown as React.RefObject<HTMLDivElement>}>
@@ -141,52 +141,54 @@ export function Contact() {
                 </p>
 
                 <form
-                  className="mt-6 grid gap-4 sm:grid-cols-2"
+                  className="mt-6 flex flex-1 flex-col gap-4"
                   onSubmit={(e) => {
                     e.preventDefault()
                     if (!isValid) return
                     window.location.href = mailtoHref
                   }}
                 >
-                  <label className="grid gap-1">
-                    <span className="text-xs font-semibold text-ink-200">Name</span>
-                    <input
-                      className="h-11 rounded-2xl border border-ink-50/20 bg-ink-950/55 px-4 text-sm text-ink-50 placeholder:text-ink-400/80 outline-none focus:border-cyra-400/70 focus:ring-2 focus:ring-cyra-400/15"
-                      value={name}
-                      onChange={(e) => setName(e.target.value)}
-                      placeholder="Your name"
-                      autoComplete="name"
-                      required
-                    />
-                  </label>
+                  <div className="grid gap-4 sm:grid-cols-2">
+                    <label className="grid gap-1">
+                      <span className="text-xs font-semibold text-ink-200">Name</span>
+                      <input
+                        className="h-11 rounded-2xl border border-ink-50/20 bg-ink-950/55 px-4 text-sm text-ink-50 placeholder:text-ink-400/80 outline-none focus:border-cyra-400/70 focus:ring-2 focus:ring-cyra-400/15"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                        placeholder="Your name"
+                        autoComplete="name"
+                        required
+                      />
+                    </label>
 
-                  <label className="grid gap-1">
-                    <span className="text-xs font-semibold text-ink-200">Email</span>
-                    <input
-                      className="h-11 rounded-2xl border border-ink-50/20 bg-ink-950/55 px-4 text-sm text-ink-50 placeholder:text-ink-400/80 outline-none focus:border-cyra-400/70 focus:ring-2 focus:ring-cyra-400/15"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      placeholder="you@company.com"
-                      autoComplete="email"
-                      inputMode="email"
-                      required
-                    />
-                  </label>
+                    <label className="grid gap-1">
+                      <span className="text-xs font-semibold text-ink-200">Email</span>
+                      <input
+                        className="h-11 rounded-2xl border border-ink-50/20 bg-ink-950/55 px-4 text-sm text-ink-50 placeholder:text-ink-400/80 outline-none focus:border-cyra-400/70 focus:ring-2 focus:ring-cyra-400/15"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        placeholder="you@company.com"
+                        autoComplete="email"
+                        inputMode="email"
+                        required
+                      />
+                    </label>
 
-                  <label className="grid gap-1 sm:col-span-2">
-                    <span className="text-xs font-semibold text-ink-200">Subject</span>
-                    <input
-                      className="h-11 rounded-2xl border border-ink-50/20 bg-ink-950/55 px-4 text-sm text-ink-50 placeholder:text-ink-400/80 outline-none focus:border-cyra-400/70 focus:ring-2 focus:ring-cyra-400/15"
-                      value={subject}
-                      onChange={(e) => setSubject(e.target.value)}
-                      placeholder="How can we help?"
-                    />
-                  </label>
+                    <label className="grid gap-1 sm:col-span-2">
+                      <span className="text-xs font-semibold text-ink-200">Subject</span>
+                      <input
+                        className="h-11 rounded-2xl border border-ink-50/20 bg-ink-950/55 px-4 text-sm text-ink-50 placeholder:text-ink-400/80 outline-none focus:border-cyra-400/70 focus:ring-2 focus:ring-cyra-400/15"
+                        value={subject}
+                        onChange={(e) => setSubject(e.target.value)}
+                        placeholder="How can we help?"
+                      />
+                    </label>
+                  </div>
 
-                  <label className="grid gap-1 sm:col-span-2">
+                  <label className="grid gap-1 flex-1">
                     <span className="text-xs font-semibold text-ink-200">Message</span>
                     <textarea
-                      className="min-h-32 rounded-2xl border border-ink-50/20 bg-ink-950/55 px-4 py-3 text-sm text-ink-50 placeholder:text-ink-400/80 outline-none focus:border-cyra-400/70 focus:ring-2 focus:ring-cyra-400/15"
+                      className="flex-1 min-h-[220px] sm:min-h-[260px] lg:min-h-[320px] resize-none rounded-2xl border border-ink-50/20 bg-ink-950/55 px-4 py-3 text-sm text-ink-50 placeholder:text-ink-400/80 outline-none focus:border-cyra-400/70 focus:ring-2 focus:ring-cyra-400/15"
                       value={message}
                       onChange={(e) => setMessage(e.target.value)}
                       placeholder="Tell us about your goals, timeline, and current setup."
@@ -194,7 +196,7 @@ export function Contact() {
                     />
                   </label>
 
-                  <div className="sm:col-span-2 flex flex-wrap gap-3">
+                  <div className="mt-auto flex flex-wrap gap-3">
                     <Button type="submit" disabled={!isValid}>
                       Send message
                     </Button>

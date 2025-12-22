@@ -37,7 +37,7 @@ export function Services() {
   const accent = useScrollParallax({ distance: 90 })
   const accent2 = useScrollParallax({ distance: 140 })
   return (
-    <section id="services" className="relative py-20 sm:py-24">
+    <section id="services" className="relative py-20 sm:py-24 overflow-x-hidden">
       <div
         className="pointer-events-none absolute inset-0 -z-10"
         ref={accent.ref as unknown as React.RefObject<HTMLDivElement>}
