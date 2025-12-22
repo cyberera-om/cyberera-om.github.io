@@ -1,11 +1,7 @@
 import type { ReactNode } from 'react'
-import { useRef } from 'react'
 import {
   motion,
   useReducedMotion,
-  useScroll,
-  useSpring,
-  useTransform,
   type MotionStyle,
 } from 'framer-motion'
 import { cn } from '../lib/utils'
@@ -18,7 +14,6 @@ export function ScrollReveal({
   from = 'bottom',
   distance = 56,
   rotate = 0,
-  offset,
   style,
 }: {
   children: ReactNode
@@ -29,57 +24,52 @@ export function ScrollReveal({
   distance?: number
   /** Optional subtle rotate during reveal (deg). */
   rotate?: number
-  /** Custom useScroll offset; default tuned for “slide in from sides”. */
-  offset?: NonNullable<Parameters<typeof useScroll>[0]>['offset']
   style?: MotionStyle
 }) {
   const reduce = useReducedMotion()
-  const ref = useRef<HTMLDivElement | null>(null)
 
   // If reduced motion is enabled, keep layout identical without scroll-driven transforms.
   if (reduce) {
     return <div className={className}>{children}</div>
   }
 
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    // Progress goes 0→1 as the element moves through the viewport; reversing on scroll-up “just works”.
-    // Tuned to “snap in” sooner and feel like cards quickly join the layout.
-    offset: offset ?? ['start 0.98', 'end 0.62'],
-  })
-
+  // NOTE: We intentionally avoid useScroll() here.
+  // With custom scroll containers (e.g. OverlayScrollbars), window scroll progress may not change,
+  // which can leave elements stuck at opacity: 0.
   const sign = from === 'right' ? 1 : -1
-
-  const xRaw =
-    from === 'left' || from === 'right'
-      ? useTransform(scrollYProgress, [0, 1], [sign * distance, 0])
-      : undefined
-
-  const yRaw =
-    from === 'bottom' ? useTransform(scrollYProgress, [0, 1], [distance, 0]) : undefined
-
-  const opacityRaw = useTransform(scrollYProgress, [0, 0.12, 1], [0, 1, 1])
-  const scaleRaw = useTransform(scrollYProgress, [0, 1], [0.985, 1])
-  const rotateRaw = rotate ? useTransform(scrollYProgress, [0, 1], [rotate, 0]) : undefined
-
-  // Smooth all transforms so they feel “premium” and not jittery.
-  const spring = { stiffness: 280, damping: 24 }
-  const x = xRaw ? useSpring(xRaw, spring) : undefined
-  const y = yRaw ? useSpring(yRaw, spring) : undefined
-  const opacity = useSpring(opacityRaw, spring)
-  const scale = useSpring(scaleRaw, spring)
+  const hiddenX = from === 'left' || from === 'right' ? sign * distance : 0
+  const hiddenY = from === 'bottom' ? distance : 0
 
   return (
     <motion.div
-      ref={ref}
       className={cn('will-change-transform', className)}
-      style={{
-        ...style,
-        x,
-        y,
-        opacity,
-        scale,
-        rotate: rotateRaw,
+      style={style}
+      initial={{
+        opacity: 0,
+        scale: 0.985,
+        x: hiddenX,
+        y: hiddenY,
+        rotate,
+      }}
+      whileInView={{
+        opacity: 1,
+        scale: 1,
+        x: 0,
+        y: 0,
+        rotate: 0,
+      }}
+      viewport={{
+        // Re-animate when scrolling back up.
+        once: false,
+        // Trigger when a small portion becomes visible.
+        amount: 0.18,
+        // Slightly early reveal for a “snappy” feel.
+        margin: '0px 0px -12% 0px',
+      }}
+      transition={{
+        type: 'spring',
+        stiffness: 280,
+        damping: 24,
       }}
     >
       {children}

@@ -4,20 +4,35 @@ import { Footer } from './components/Footer'
 import { Hero } from './components/Hero'
 import { Navbar } from './components/Navbar'
 import { Services } from './components/Services'
+import { OverlayScrollbarsComponent } from 'overlayscrollbars-react'
 
 export default function App() {
   return (
-    <div className="min-h-dvh font-sans">
-      <Navbar />
+    <OverlayScrollbarsComponent
+      defer
+      options={{
+        scrollbars: {
+          theme: 'os-theme-dark',
+          autoHide: 'leave',
+          autoHideDelay: 450,
+          clickScroll: true,
+        },
+      }}
+      className="min-h-dvh font-sans"
+      style={{ height: '100dvh' }}
+    >
+      <div className="min-h-dvh">
+        <Navbar />
 
-      <main>
-        <Hero />
-        <About />
-        <Services />
-        <Contact />
-      </main>
+        <main>
+          <Hero />
+          <About />
+          <Services />
+          <Contact />
+        </main>
 
-      <Footer />
-    </div>
+        <Footer />
+      </div>
+    </OverlayScrollbarsComponent>
   )
 }
