@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/png" href="/logo.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <script>
+      ;(() => {
+        try {
+          const stored = localStorage.getItem('cyra-theme')
+          const theme = stored === 'light' ? 'light' : 'dark'
+          document.documentElement.dataset.theme = theme
+        } catch {
+          document.documentElement.dataset.theme = 'dark'
+        }
+      })()
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+
+    <title>CYBER ERA (CYRA) — Cybersecurity, Training & Digital Solutions</title>
+    <meta
+      name="description"
+      content="CYBER ERA (CYRA) delivers cybersecurity services, professional training, and secure digital solutions to help organisations become resilient and future‑ready."
+    />
+    <meta name="theme-color" content="#0b1220" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="CYBER ERA (CYRA)" />
+    <meta
+      property="og:description"
+      content="Cybersecurity, Professional Training & Digital Solutions — secure, resilient, future‑ready organisations."
+    />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
