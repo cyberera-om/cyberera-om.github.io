@@ -84,6 +84,14 @@ export function Hero() {
 
   const dots = useMemo(() => slides.map((_, i) => i), [])
 
+  // Preload all hero images for instant transitions
+  useEffect(() => {
+    slides.forEach((slide) => {
+      const img = new Image()
+      img.src = slide.image
+    })
+  }, [])
+
   return (
     <section
       id="hero"
@@ -91,13 +99,13 @@ export function Hero() {
       className="force-dark relative min-h-screen overflow-hidden pt-20 text-ink-50 flex items-center"
     >
       <div className="absolute inset-0">
-        <AnimatePresence mode="wait">
+        <AnimatePresence initial={false}>
           <motion.div
             key={active.image}
-            initial={reduceMotion ? false : { opacity: 0, scale: 1.02 }}
-            animate={reduceMotion ? undefined : { opacity: 1, scale: 1 }}
+            initial={reduceMotion ? false : { opacity: 0 }}
+            animate={reduceMotion ? undefined : { opacity: 1 }}
             exit={reduceMotion ? undefined : { opacity: 0 }}
-            transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 0.8, ease: 'easeInOut' }}
             className="absolute -inset-24"
             style={{ y: bgY }}
           >
