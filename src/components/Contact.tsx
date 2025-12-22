@@ -75,8 +75,8 @@ export function Contact() {
       <Container>
         <SectionHeading
           eyebrow="CONTACT"
-          title="Talk to CYRA"
-          description="Send a quick note—our team replies promptly."
+          title="Get in touch"
+          description="Send us a quick message our team will get back to you shortly."
         />
 
         <div className="mt-12 grid gap-6 lg:grid-cols-12">
@@ -151,7 +151,7 @@ export function Contact() {
                   <label className="grid gap-1">
                     <span className="text-xs font-semibold text-ink-200">Name</span>
                     <input
-                      className="h-11 rounded-2xl border border-white/10 bg-ink-950/50 px-4 text-sm outline-none focus:border-cyra-400/70"
+                      className="h-11 rounded-2xl border border-ink-50/20 bg-ink-950/55 px-4 text-sm text-ink-50 placeholder:text-ink-400/80 outline-none focus:border-cyra-400/70 focus:ring-2 focus:ring-cyra-400/15"
                       value={name}
                       onChange={(e) => setName(e.target.value)}
                       placeholder="Your name"
@@ -163,7 +163,7 @@ export function Contact() {
                   <label className="grid gap-1">
                     <span className="text-xs font-semibold text-ink-200">Email</span>
                     <input
-                      className="h-11 rounded-2xl border border-white/10 bg-ink-950/50 px-4 text-sm outline-none focus:border-cyra-400/70"
+                      className="h-11 rounded-2xl border border-ink-50/20 bg-ink-950/55 px-4 text-sm text-ink-50 placeholder:text-ink-400/80 outline-none focus:border-cyra-400/70 focus:ring-2 focus:ring-cyra-400/15"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       placeholder="you@company.com"
@@ -176,7 +176,7 @@ export function Contact() {
                   <label className="grid gap-1 sm:col-span-2">
                     <span className="text-xs font-semibold text-ink-200">Subject</span>
                     <input
-                      className="h-11 rounded-2xl border border-white/10 bg-ink-950/50 px-4 text-sm outline-none focus:border-cyra-400/70"
+                      className="h-11 rounded-2xl border border-ink-50/20 bg-ink-950/55 px-4 text-sm text-ink-50 placeholder:text-ink-400/80 outline-none focus:border-cyra-400/70 focus:ring-2 focus:ring-cyra-400/15"
                       value={subject}
                       onChange={(e) => setSubject(e.target.value)}
                       placeholder="How can we help?"
@@ -186,7 +186,7 @@ export function Contact() {
                   <label className="grid gap-1 sm:col-span-2">
                     <span className="text-xs font-semibold text-ink-200">Message</span>
                     <textarea
-                      className="min-h-32 rounded-2xl border border-white/10 bg-ink-950/50 px-4 py-3 text-sm outline-none focus:border-cyra-400/70"
+                      className="min-h-32 rounded-2xl border border-ink-50/20 bg-ink-950/55 px-4 py-3 text-sm text-ink-50 placeholder:text-ink-400/80 outline-none focus:border-cyra-400/70 focus:ring-2 focus:ring-cyra-400/15"
                       value={message}
                       onChange={(e) => setMessage(e.target.value)}
                       placeholder="Tell us about your goals, timeline, and current setup."
