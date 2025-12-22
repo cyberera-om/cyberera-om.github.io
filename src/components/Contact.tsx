@@ -3,6 +3,7 @@ import { motion } from 'framer-motion'
 import { Mail, MapPin, Phone } from 'lucide-react'
 import { Button } from './Button'
 import { Container } from './Container'
+import { OsmThemeMap } from './OsmThemeMap'
 import { SectionHeading } from './SectionHeading'
 import { ScrollReveal } from './ScrollReveal'
 import { useScrollParallax } from '../lib/parallax'
@@ -122,15 +123,12 @@ export function Contact() {
                 </div>
 
                 <div className="mt-6 flex-1 overflow-hidden rounded-2xl border border-white/10">
-                  <iframe
-                    title="Map"
-                    src="https://maps.google.com/maps?width=100%25&height=450&hl=en&q=Muscat,%20Oman&t=&z=12&ie=UTF8&iwloc=B&output=embed"
-                    width="100%"
-                    height="100%"
-                    className="h-full min-h-[260px] w-full"
-                    loading="lazy"
-                    referrerPolicy="no-referrer-when-downgrade"
-                  />
+                  <div className="h-full min-h-[260px] w-full">
+                    <OsmThemeMap className="h-full min-h-[260px] w-full" />
+                    <div className="border-t border-white/10 bg-ink-950/40 px-3 py-2 text-[10px] leading-snug text-ink-300">
+                      Map data © OpenStreetMap contributors • Tiles © CARTO (dark theme)
+                    </div>
+                  </div>
                 </div>
               </div>
             </ScrollReveal>

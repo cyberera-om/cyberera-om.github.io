@@ -85,7 +85,11 @@ export function Hero() {
   const dots = useMemo(() => slides.map((_, i) => i), [])
 
   return (
-    <section ref={heroRef} className="force-dark relative min-h-screen overflow-hidden pt-20 text-ink-50 flex items-center">
+    <section
+      id="hero"
+      ref={heroRef}
+      className="force-dark relative min-h-screen overflow-hidden pt-20 text-ink-50 flex items-center"
+    >
       <div className="absolute inset-0">
         <AnimatePresence mode="wait">
           <motion.div

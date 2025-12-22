@@ -18,7 +18,7 @@ export default function App() {
           clickScroll: true,
         },
       }}
-      className="min-h-dvh font-sans"
+      className="app-scroll min-h-dvh font-sans"
       style={{ height: '100dvh' }}
     >
       <div className="min-h-dvh">

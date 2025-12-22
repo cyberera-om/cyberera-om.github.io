@@ -76,6 +76,20 @@
     scroll-behavior: smooth;
   }
 
+  /* Never allow horizontal scrolling (common culprit: transformed/absolute elements + custom scroll containers). */
+  html,
+  body {
+    overflow-x: clip;
+  }
+
+  /* Fallback for browsers that don't support overflow-x: clip. */
+  @supports not (overflow-x: clip) {
+    html,
+    body {
+      overflow-x: hidden;
+    }
+  }
+
   html,
   body,
   #root {
@@ -86,6 +100,13 @@
     @apply bg-ink-950 text-ink-50 antialiased;
     text-rendering: geometricPrecision;
     overflow-x: hidden;
+  }
+
+  /* OverlayScrollbars: ensure the scroll viewport never introduces horizontal overflow. */
+  .app-scroll,
+  .app-scroll .os-viewport,
+  .app-scroll .os-content {
+    overflow-x: hidden !important;
   }
 
   ::selection {

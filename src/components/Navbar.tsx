@@ -23,15 +23,35 @@ export function Navbar() {
   const reduceMotion = useReducedMotion()
   const [open, setOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const [overHero, setOverHero] = useState(true)
   const { theme, toggleTheme } = useTheme()
 
   const cta = useMemo(() => ({ href: '#contact', label: 'Request Consultation' }), [])
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 12)
-    onScroll()
-    window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
+    // With OverlayScrollbars, scrolling happens inside its viewport (not window).
+    const viewport = document.querySelector('.app-scroll .os-viewport') as HTMLElement | null
+
+    const compute = () => {
+      const y = viewport ? viewport.scrollTop : window.scrollY
+      setScrolled(y > 12)
+
+      const hero = document.getElementById('hero')
+      const heroH = hero?.offsetHeight ?? 0
+      // Navbar overlays Hero while we're roughly within the hero block.
+      // Using height/scrollTop is robust for custom scroll containers.
+      setOverHero(heroH ? y < heroH - 72 : y < 520)
+    }
+
+    compute()
+    const target: HTMLElement | Window = viewport ?? window
+    target.addEventListener('scroll', compute as any, { passive: true } as any)
+    window.addEventListener('resize', compute, { passive: true })
+
+    return () => {
+      target.removeEventListener('scroll', compute as any)
+      window.removeEventListener('resize', compute)
+    }
   }, [])
 
   useEffect(() => {
@@ -57,8 +77,16 @@ export function Navbar() {
         animate={reduceMotion ? undefined : { y: 0, opacity: 1 }}
         transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
         className={cn(
-          'border-b border-transparent',
-          scrolled ? 'bg-ink-950/80 border-white/10' : 'bg-transparent',
+          // No border; rely on blur + subtle background to separate from content.
+          'backdrop-blur-md supports-[backdrop-filter]:bg-ink-950/35',
+          // Ensure nav stays readable over the always-dark Hero even when site theme is light.
+          overHero ? 'force-dark' : undefined,
+          // Background + border that work in BOTH themes because ink tokens invert with theme.
+          scrolled
+            ? 'bg-ink-950/70'
+            : overHero
+              ? 'bg-gradient-to-b from-ink-950/60 to-ink-950/0'
+              : 'bg-transparent',
         )}
       >
         <Container className="flex h-16 items-center justify-between">
@@ -88,7 +116,7 @@ export function Navbar() {
 
             <button
               type="button"
-              className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-ink-50/10 bg-ink-900/10 hover:bg-ink-900/15"
+              className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-ink-50/10 bg-ink-900/10 hover:bg-ink-900/15 text-ink-50"
               aria-label={theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'}
               onClick={toggleTheme}
             >
@@ -106,7 +134,7 @@ export function Navbar() {
           </nav>
 
           <button
-            className="md:hidden inline-flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/5"
+            className="md:hidden inline-flex h-10 w-10 items-center justify-center rounded-xl border border-ink-50/12 bg-ink-900/10 text-ink-50"
             aria-label={open ? 'Close menu' : 'Open menu'}
             aria-controls="mobile-nav"
             onClick={() => setOpen((v) => !v)}
