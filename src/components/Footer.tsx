@@ -1,8 +1,10 @@
 import { Linkedin, Twitter } from 'lucide-react'
+import { useI18n } from '../lib/i18n'
 import { Container } from './Container'
 
 export function Footer() {
   const year = new Date().getFullYear()
+  const { t } = useI18n()
   return (
     <footer className="force-dark border-t border-white/10 bg-ink-950 text-ink-50">
       <Container>
@@ -23,11 +25,11 @@ export function Footer() {
               </div>
 
               <p className="mt-6 max-w-md text-sm leading-relaxed text-ink-100">
-                Cybersecurity, Professional Training & Digital Solutions.
+                {t('footer.tagline')}
               </p>
 
               <div className="mt-6 space-y-2 text-sm text-ink-100">
-                <div>P.O BOX: 121, Postal Code: 312, Muscat, Sultanate of Oman</div>
+                <div>{t('footer.addressValue')}</div>
                 <div className="flex flex-wrap gap-x-3 gap-y-1">
                   <a className="hover:text-ink-50 transition-colors" href="mailto:info@cyra.om">
                     info@cyra.om
@@ -70,7 +72,7 @@ export function Footer() {
           </div>
 
           <div className="mt-16 border-t border-white/10 pt-10 text-xs text-ink-200">
-            Copyright ©{year} Cyber Era, Ltd. All Rights Reserved.
+            Copyright ©{year} Cyber Era, Ltd. {t('footer.copyright')}
           </div>
         </div>
       </Container>

@@ -102,6 +102,16 @@
     overflow-x: hidden;
   }
 
+  /* Arabic typography: use Cairo and RTL direction (dir is set in I18nProvider). */
+  html:lang(ar) .font-sans {
+    font-family: 'Cairo', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto,
+      'Helvetica Neue', Arial, 'Noto Sans', 'Liberation Sans', sans-serif;
+  }
+
+  html:lang(ar) body {
+    letter-spacing: 0;
+  }
+
   /* OverlayScrollbars: ensure the scroll viewport never introduces horizontal overflow. */
   .app-scroll,
   .app-scroll .os-viewport,

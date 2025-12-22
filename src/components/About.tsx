@@ -5,33 +5,19 @@ import { ParallaxCard } from './ParallaxCard'
 import { SectionHeading } from './SectionHeading'
 import { ScrollReveal } from './ScrollReveal'
 import { useScrollParallax } from '../lib/parallax'
+import { useI18n } from '../lib/i18n'
 
-const cards = [
-  {
-    title: 'Our Vision',
-    icon: Lightbulb,
-    text: "CYRA's vision to become a leading global provider of cybersecurity, professional training, and digital solutions, supporting organisations in building secure, resilient, and future-ready digital capabilities.",
-  },
-  {
-    title: 'Our Mission',
-    icon: Target,
-    text: "CYRA's mission is to empower organisations and individuals through cybersecurity, professional training, and digital solution.",
-  },
-  {
-    title: 'What We Do',
-    icon: BadgeCheck,
-    text: 'CYRA enable long-term resilience by assessing needs, implementing robust technologies, monitoring performance and threats, and building practical skills that support sustainable digital capability.',
-  },
-  {
-    title: 'Our Core Values',
-    icon: Handshake,
-    text: "CYRA's Core Values: Integrity & Trust, Innovation, Quality Excellence, Security-first mindset and Continuous Learning",
-  },
+const CARD_META = [
+  { icon: Lightbulb, titleKey: 'about.card.vision.title', textKey: 'about.card.vision.text' },
+  { icon: Target, titleKey: 'about.card.mission.title', textKey: 'about.card.mission.text' },
+  { icon: BadgeCheck, titleKey: 'about.card.whatWeDo.title', textKey: 'about.card.whatWeDo.text' },
+  { icon: Handshake, titleKey: 'about.card.values.title', textKey: 'about.card.values.text' },
 ] as const
 
 export function About() {
   const orbA = useScrollParallax({ distance: 110 })
   const orbB = useScrollParallax({ distance: 70 })
+  const { t } = useI18n()
   return (
     <section id="about" className="relative py-20 sm:py-24 overflow-x-hidden">
       <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(1000px_circle_at_80%_20%,rgba(249,115,22,0.10),transparent_60%)]" />
@@ -62,18 +48,19 @@ export function About() {
 
       <Container>
         <SectionHeading
-          eyebrow="ABOUT US"
-          title="Secure, Resilient, Future-Ready"
-          description="CYBER ERA (CYRA) is a global cybersecurity, professional training, and digital solutions company. We combine international best practice with deep technical expertise to support secure, resilient, and future-ready organisations."
+          eyebrow={t('about.eyebrow')}
+          title={t('about.title')}
+          description={t('about.description')}
         />
 
         <div className="mt-12 grid gap-3 md:grid-cols-2">
-          {cards.map((c, i) => {
+          {CARD_META.map((c, i) => {
             const Icon = c.icon
             const from = i % 2 === 0 ? 'left' : 'right'
+            const title = t(c.titleKey)
             return (
               <ScrollReveal
-                key={c.title}
+                key={c.titleKey}
                 from={from}
                 distance={64}
                 className="[perspective:900px] flex"
@@ -83,9 +70,9 @@ export function About() {
                     <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white/5 border border-white/10 text-cyra-300">
                       <Icon className="h-5 w-5" />
                     </div>
-                    <h3 className="text-lg font-extrabold">{c.title}</h3>
+                    <h3 className="text-lg font-extrabold">{title}</h3>
                   </div>
-                  <p className="mt-3 text-sm leading-relaxed text-ink-200 flex-1">{c.text}</p>
+                  <p className="mt-3 text-sm leading-relaxed text-ink-200 flex-1">{t(c.textKey)}</p>
                 </ParallaxCard>
               </ScrollReveal>
             )

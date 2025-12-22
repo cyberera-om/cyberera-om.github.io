@@ -1,41 +1,23 @@
 import { motion } from 'framer-motion'
 import { Cloud, Code2, GraduationCap, Shield } from 'lucide-react'
 import { useScrollParallax } from '../lib/parallax'
+import { useI18n } from '../lib/i18n'
 import { Container } from './Container'
 import { ParallaxCard } from './ParallaxCard'
 import { SectionHeading } from './SectionHeading'
 import { ScrollReveal } from './ScrollReveal'
 
-const services = [
-  {
-    title: 'Corporate & Professional Training',
-    description:
-      'CYRA provides professional and corporate training programmes aligned with global certification standards, combining technical depth with practical, job-ready skills.',
-    icon: GraduationCap,
-  },
-  {
-    title: 'Cybersecurity Services',
-    description:
-      'CYRA provides end-to-end cybersecurity services to identify vulnerabilities, detect threats, and respond effectively to cyber incidents across complex digital environments.',
-    icon: Shield,
-  },
-  {
-    title: 'Software Development',
-    description:
-      'CYRA designs and delivers secure, scalable digital solutions focused on web and mobile application development, business process automation and secure cloud migration to support enterprise growth.',
-    icon: Code2,
-  },
-  {
-    title: 'Managed IT & Cloud Services',
-    description:
-      'CYRA delivers managed IT and cloud services that ensure secure, resilient, and high-performing technology environments through proactive support and continuous monitoring.',
-    icon: Cloud,
-  },
+const SERVICES_META = [
+  { icon: GraduationCap, titleKey: 'services.training.title', textKey: 'services.training.text' },
+  { icon: Shield, titleKey: 'services.cyber.title', textKey: 'services.cyber.text' },
+  { icon: Code2, titleKey: 'services.dev.title', textKey: 'services.dev.text' },
+  { icon: Cloud, titleKey: 'services.it.title', textKey: 'services.it.text' },
 ] as const
 
 export function Services() {
   const accent = useScrollParallax({ distance: 90 })
   const accent2 = useScrollParallax({ distance: 140 })
+  const { t } = useI18n()
   return (
     <section id="services" className="relative py-20 sm:py-24 overflow-x-hidden">
       <div
@@ -75,18 +57,19 @@ export function Services() {
 
       <Container>
         <SectionHeading
-          eyebrow="OUR SERVICES"
-          title="Digital Security & Growth"
-          description="Cybersecurity, training, and delivery—built for real-world outcomes."
+          eyebrow={t('services.eyebrow')}
+          title={t('services.title')}
+          description={t('services.description')}
         />
 
         <div className="mt-12 grid gap-3 md:grid-cols-2">
-          {services.map((s, i) => {
+          {SERVICES_META.map((s, i) => {
             const Icon = s.icon
             const from = i % 2 === 0 ? 'left' : 'right'
+            const title = t(s.titleKey)
             return (
               <ScrollReveal
-                key={s.title}
+                key={s.titleKey}
                 from={from}
                 distance={64}
                 className="[perspective:900px] flex"
@@ -103,15 +86,15 @@ export function Services() {
                         <Icon className="h-5 w-5" />
                       </div>
                       <div>
-                        <h3 className="text-lg font-extrabold tracking-tight">{s.title}</h3>
-                        <p className="mt-2 text-sm leading-relaxed text-ink-200">{s.description}</p>
+                        <h3 className="text-lg font-extrabold tracking-tight">{title}</h3>
+                        <p className="mt-2 text-sm leading-relaxed text-ink-200">{t(s.textKey)}</p>
                       </div>
                     </div>
                   </div>
 
                   <div className="mt-6 flex items-center gap-2 text-xs text-ink-300">
                     <span className="inline-flex h-1.5 w-1.5 rounded-full bg-cyra-400" />
-                    Security-first delivery • Clear scope • Measurable results
+                    {t('services.badge')}
                   </div>
                 </ParallaxCard>
               </ScrollReveal>

@@ -1,6 +1,8 @@
 import { useMemo, useState } from 'react'
 import { motion } from 'framer-motion'
 import { Mail, MapPin, Phone } from 'lucide-react'
+import { cn } from '../lib/utils'
+import { useI18n } from '../lib/i18n'
 import { Button } from './Button'
 import { Container } from './Container'
 import { OsmThemeMap } from './OsmThemeMap'
@@ -25,6 +27,7 @@ function buildMailto({
 }
 
 export function Contact() {
+  const { t, dir } = useI18n()
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [subject, setSubject] = useState('')
@@ -44,10 +47,10 @@ export function Contact() {
 
     return buildMailto({
       to,
-      subject: subject || 'Website enquiry',
+      subject: subject || t('contact.mailSubject'),
       body,
     })
-  }, [email, message, name, subject])
+  }, [email, message, name, subject, t])
 
   const isValid = useMemo(() => {
     if (!name.trim()) return false
@@ -74,31 +77,31 @@ export function Contact() {
 
       <Container>
         <SectionHeading
-          eyebrow="CONTACT"
-          title="Get in touch"
-          description="Send us a quick message our team will get back to you shortly."
+          eyebrow={t('contact.eyebrow')}
+          title={t('contact.title')}
+          description={t('contact.description')}
         />
 
         <div className="mt-12 grid gap-6 lg:grid-cols-12">
             <ScrollReveal from="left" distance={64} className="lg:col-span-5 flex">
               <div className="glass flex-1 rounded-3xl p-6 flex flex-col">
-                <h3 className="text-lg font-extrabold">Contact details</h3>
+                <h3 className="text-lg font-extrabold">{t('contact.detailsTitle')}</h3>
                 <div className="mt-5 space-y-4 text-sm text-ink-200">
-                  <div className="flex gap-3">
+                  <div className={cn('flex gap-3', dir === 'rtl' ? 'flex-row-reverse text-right' : undefined)}>
                     <div className="mt-0.5 text-cyra-300">
                       <MapPin className="h-5 w-5" />
                     </div>
                     <div>
-                      <div className="font-semibold text-ink-100">Address</div>
-                      <div>P.O BOX: 121, Postal Code: 312, Muscat, Sultanate of Oman</div>
+                      <div className="font-semibold text-ink-100">{t('contact.addressLabel')}</div>
+                      <div>{t('contact.addressValue')}</div>
                     </div>
                   </div>
-                  <div className="flex gap-3">
+                  <div className={cn('flex gap-3', dir === 'rtl' ? 'flex-row-reverse text-right' : undefined)}>
                     <div className="mt-0.5 text-cyra-300">
                       <Phone className="h-5 w-5" />
                     </div>
                     <div>
-                      <div className="font-semibold text-ink-100">Phone</div>
+                      <div className="font-semibold text-ink-100">{t('contact.phoneLabel')}</div>
                       <a className="hover:text-white" href="tel:+96876886668">
                         +968 7688 6668
                       </a>
@@ -109,12 +112,12 @@ export function Contact() {
                       </div>
                     </div>
                   </div>
-                  <div className="flex gap-3">
+                  <div className={cn('flex gap-3', dir === 'rtl' ? 'flex-row-reverse text-right' : undefined)}>
                     <div className="mt-0.5 text-cyra-300">
                       <Mail className="h-5 w-5" />
                     </div>
                     <div>
-                      <div className="font-semibold text-ink-100">Email</div>
+                      <div className="font-semibold text-ink-100">{t('contact.emailLabel')}</div>
                       <a className="hover:text-white" href="mailto:info@cyra.om">
                         info@cyra.om
                       </a>
@@ -126,7 +129,7 @@ export function Contact() {
                   <div className="h-full min-h-[260px] w-full bg-ink-950">
                     <OsmThemeMap className="h-full min-h-[260px] w-full bg-ink-950" />
                     <div className="border-t border-white/10 bg-ink-950/40 px-3 py-2 text-[10px] leading-snug text-ink-300">
-                      Map data © OpenStreetMap contributors • Tiles © CARTO (dark theme)
+                      {t('contact.mapAttribution')}
                     </div>
                   </div>
                 </div>
@@ -135,10 +138,8 @@ export function Contact() {
 
             <ScrollReveal from="right" distance={64} className="lg:col-span-7 flex">
               <div className="glass flex-1 rounded-3xl p-6 flex flex-col">
-                <h3 className="text-lg font-extrabold">Send a message</h3>
-                <p className="mt-2 text-sm text-ink-200">
-                  Opens your email client. Want a fully automated form (API + spam protection)? We can wire it up.
-                </p>
+                <h3 className="text-lg font-extrabold">{t('contact.formTitle')}</h3>
+                <p className="mt-2 text-sm text-ink-200">{t('contact.formHint')}</p>
 
                 <form
                   className="mt-6 flex flex-1 flex-col gap-4"
@@ -150,24 +151,24 @@ export function Contact() {
                 >
                   <div className="grid gap-4 sm:grid-cols-2">
                     <label className="grid gap-1">
-                      <span className="text-xs font-semibold text-ink-200">Name</span>
+                      <span className="text-xs font-semibold text-ink-200">{t('contact.nameLabel')}</span>
                       <input
                         className="h-11 rounded-2xl border border-ink-50/20 bg-ink-950/55 px-4 text-sm text-ink-50 placeholder:text-ink-400/80 outline-none focus:border-cyra-400/70 focus:ring-2 focus:ring-cyra-400/15"
                         value={name}
                         onChange={(e) => setName(e.target.value)}
-                        placeholder="Your name"
+                        placeholder={t('contact.namePlaceholder')}
                         autoComplete="name"
                         required
                       />
                     </label>
 
                     <label className="grid gap-1">
-                      <span className="text-xs font-semibold text-ink-200">Email</span>
+                      <span className="text-xs font-semibold text-ink-200">{t('contact.emailFieldLabel')}</span>
                       <input
                         className="h-11 rounded-2xl border border-ink-50/20 bg-ink-950/55 px-4 text-sm text-ink-50 placeholder:text-ink-400/80 outline-none focus:border-cyra-400/70 focus:ring-2 focus:ring-cyra-400/15"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
-                        placeholder="you@company.com"
+                        placeholder={t('contact.emailPlaceholder')}
                         autoComplete="email"
                         inputMode="email"
                         required
@@ -175,36 +176,36 @@ export function Contact() {
                     </label>
 
                     <label className="grid gap-1 sm:col-span-2">
-                      <span className="text-xs font-semibold text-ink-200">Subject</span>
+                      <span className="text-xs font-semibold text-ink-200">{t('contact.subjectLabel')}</span>
                       <input
                         className="h-11 rounded-2xl border border-ink-50/20 bg-ink-950/55 px-4 text-sm text-ink-50 placeholder:text-ink-400/80 outline-none focus:border-cyra-400/70 focus:ring-2 focus:ring-cyra-400/15"
                         value={subject}
                         onChange={(e) => setSubject(e.target.value)}
-                        placeholder="How can we help?"
+                        placeholder={t('contact.subjectPlaceholder')}
                       />
                     </label>
                   </div>
 
                   <label className="grid gap-1 flex-1">
-                    <span className="text-xs font-semibold text-ink-200">Message</span>
+                    <span className="text-xs font-semibold text-ink-200">{t('contact.messageLabel')}</span>
                     <textarea
                       className="flex-1 min-h-[220px] sm:min-h-[260px] lg:min-h-[320px] resize-none rounded-2xl border border-ink-50/20 bg-ink-950/55 px-4 py-3 text-sm text-ink-50 placeholder:text-ink-400/80 outline-none focus:border-cyra-400/70 focus:ring-2 focus:ring-cyra-400/15"
                       value={message}
                       onChange={(e) => setMessage(e.target.value)}
-                      placeholder="Tell us about your goals, timeline, and current setup."
+                      placeholder={t('contact.messagePlaceholder')}
                       required
                     />
                   </label>
 
                   <div className="mt-auto flex flex-wrap gap-3">
                     <Button type="submit" disabled={!isValid}>
-                      Send message
+                      {t('contact.send')}
                     </Button>
                     <a
                       className="inline-flex items-center justify-center rounded-xl px-4 py-2.5 text-sm font-semibold text-ink-200 hover:text-ink-50"
                       href={mailtoHref}
                     >
-                      Or open email directly
+                      {t('contact.openEmail')}
                     </a>
                   </div>
                 </form>

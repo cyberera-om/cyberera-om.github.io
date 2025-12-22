@@ -7,33 +7,38 @@ import {
   useSpring,
   useTransform,
 } from 'framer-motion'
-import { ArrowRight, ShieldCheck, Sparkles, GraduationCap } from 'lucide-react'
+import { ArrowLeft, ArrowRight, ShieldCheck, Sparkles, GraduationCap } from 'lucide-react'
 import { fadeUp, stagger } from '../lib/motion'
+import { useI18n } from '../lib/i18n'
+import { cn } from '../lib/utils'
 import { Button } from './Button'
 import { Container } from './Container'
 import { ParallaxCard } from './ParallaxCard'
 
-const slides = [
+const SLIDES = [
   {
     image: '/images/bg_1.jpg',
-    eyebrow: 'Cybersecurity, Professional Training & Digital Solutions',
-    title: 'Secure. Future‑ready. Built to last.',
-    cta: { label: 'Explore Services', href: '#services' },
     icon: ShieldCheck,
+    eyebrowKey: 'hero.slide1.eyebrow',
+    titleKey: 'hero.slide1.title',
+    ctaKey: 'hero.slide1.cta',
+    href: '#services',
   },
   {
     image: '/images/bg_2.jpg',
-    eyebrow: 'Cybersecurity Services',
-    title: 'Stay ahead of evolving cyber threats.',
-    cta: { label: 'Request Consultation', href: '#contact' },
     icon: Sparkles,
+    eyebrowKey: 'hero.slide2.eyebrow',
+    titleKey: 'hero.slide2.title',
+    ctaKey: 'hero.slide2.cta',
+    href: '#contact',
   },
   {
     image: '/images/bg_3.jpg',
-    eyebrow: 'Professional & Corporate Training',
-    title: 'Build skills teams can use on day one.',
-    cta: { label: 'Request Consultation', href: '#contact' },
     icon: GraduationCap,
+    eyebrowKey: 'hero.slide3.eyebrow',
+    titleKey: 'hero.slide3.title',
+    ctaKey: 'hero.slide3.cta',
+    href: '#contact',
   },
 ] as const
 
@@ -47,6 +52,21 @@ function scrollToHash(href: string) {
 export function Hero() {
   const reduceMotion = useReducedMotion()
   const [index, setIndex] = useState(0)
+
+  const { t, dir } = useI18n()
+  const CtaArrow = dir === 'rtl' ? ArrowLeft : ArrowRight
+
+  const slides = useMemo(
+    () =>
+      SLIDES.map((s) => ({
+        image: s.image,
+        icon: s.icon,
+        eyebrow: t(s.eyebrowKey),
+        title: t(s.titleKey),
+        cta: { label: t(s.ctaKey), href: s.href },
+      })),
+    [t],
+  )
 
   const heroRef = useRef<HTMLElement | null>(null)
   const { scrollYProgress } = useScroll({
@@ -86,7 +106,7 @@ export function Hero() {
 
   // Preload all hero images for instant transitions
   useEffect(() => {
-    slides.forEach((slide) => {
+    SLIDES.forEach((slide) => {
       const img = new Image()
       img.src = slide.image
     })
@@ -147,10 +167,13 @@ export function Hero() {
             animate="visible"
             className="grid gap-10 lg:grid-cols-12 lg:items-center"
           >
-            <div className="lg:col-span-7">
+            <div className={cn('lg:col-span-7', dir === 'rtl' ? 'text-right' : undefined)}>
               <motion.div
                 variants={fadeUp}
-                className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs font-semibold text-ink-100"
+                className={cn(
+                  'inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs font-semibold text-ink-100',
+                  dir === 'rtl' ? 'flex-row-reverse' : undefined,
+                )}
               >
                 <Icon className="h-4 w-4 text-cyra-300" />
                 <span className="text-ink-200">{active.eyebrow}</span>
@@ -164,10 +187,13 @@ export function Hero() {
               </motion.h1>
 
               <motion.p variants={fadeUp} className="mt-5 max-w-2xl text-pretty text-lg text-ink-200">
-                Assess risk. Build securely. Train teams. Deliver with confidence.
+                {t('hero.lead')}
               </motion.p>
 
-              <motion.div variants={fadeUp} className="mt-7 flex flex-wrap items-center gap-3">
+              <motion.div
+                variants={fadeUp}
+                className={cn('mt-7 flex w-full flex-wrap items-center gap-3', dir === 'rtl' ? 'justify-start' : undefined)}
+              >
                 <Button
                   onClick={(e) => {
                     e.preventDefault()
@@ -175,7 +201,7 @@ export function Hero() {
                   }}
                 >
                   {active.cta.label}
-                  <ArrowRight className="h-4 w-4" />
+                  <CtaArrow className="h-4 w-4" />
                 </Button>
                 <Button
                   variant="secondary"
@@ -184,7 +210,7 @@ export function Hero() {
                     scrollToHash('#about')
                   }}
                 >
-                  Learn more
+                  {t('hero.learnMore')}
                 </Button>
               </motion.div>
 
@@ -193,9 +219,9 @@ export function Hero() {
                 className="mt-10 grid max-w-xl grid-cols-2 gap-3 sm:grid-cols-3"
               >
                 {[
-                  { k: 'Security‑first', v: 'Mindset & delivery' },
-                  { k: 'Practical training', v: 'Job‑ready skills' },
-                  { k: 'Secure products', v: 'Built to scale' },
+                  { k: t('hero.mini1.k'), v: t('hero.mini1.v') },
+                  { k: t('hero.mini2.k'), v: t('hero.mini2.v') },
+                  { k: t('hero.mini3.k'), v: t('hero.mini3.v') },
                 ].map((item) => (
                   <div key={item.k} className="[perspective:900px] flex">
                     <ParallaxCard className="glass flex-1 overflow-hidden rounded-2xl p-4" intensity={0.9}>
@@ -213,8 +239,8 @@ export function Hero() {
                   <div className="absolute inset-0 -z-10 bg-gradient-to-br from-cyra-500/15 via-transparent to-white/5" />
                 <div className="flex items-center justify-between">
                   <div>
-                    <div className="text-sm font-semibold text-ink-200">Trusted delivery</div>
-                    <div className="mt-1 text-2xl font-extrabold">Secure. Practical. Measurable.</div>
+                    <div className="text-sm font-semibold text-ink-200">{t('hero.trustedEyebrow')}</div>
+                    <div className="mt-1 text-2xl font-extrabold">{t('hero.trustedTitle')}</div>
                   </div>
                   <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-cyra-500/15 text-cyra-300">
                     <ShieldCheck className="h-5 w-5" />
@@ -222,18 +248,22 @@ export function Hero() {
                 </div>
 
                 <div className="mt-6 grid grid-cols-3 gap-3">
-                  {[{ n: 'Risk', d: 'Assessments' }, { n: 'Build', d: 'Secure solutions' }, { n: 'Train', d: 'Upskilling' }].map(
-                    (s) => (
-                      <div key={s.n} className="rounded-2xl border border-white/10 bg-ink-950/40 p-4">
-                        <div className="text-sm font-extrabold">{s.n}</div>
-                        <div className="mt-1 text-xs text-ink-300">{s.d}</div>
-                      </div>
-                    ),
-                  )}
+                  {[
+                    { n: t('hero.kpi1.n'), d: t('hero.kpi1.d') },
+                    { n: t('hero.kpi2.n'), d: t('hero.kpi2.d') },
+                    { n: t('hero.kpi3.n'), d: t('hero.kpi3.d') },
+                  ].map((s) => (
+                    <div key={s.n} className="rounded-2xl border border-white/10 bg-ink-950/40 p-4">
+                      <div className="text-sm font-extrabold">{s.n}</div>
+                      <div className="mt-1 text-xs text-ink-300">{s.d}</div>
+                    </div>
+                  ))}
                 </div>
 
                 <div className="mt-6 text-xs text-ink-300">
-                  Tip: animations respect <span className="text-ink-100 font-semibold">Reduced Motion</span> settings.
+                  {t('hero.tip')}{' '}
+                  <span className="text-ink-100 font-semibold">{t('hero.tipStrong')}</span>{' '}
+                  {t('hero.tipTail')}
                 </div>
                 </ParallaxCard>
               </motion.div>

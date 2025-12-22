@@ -1,16 +1,11 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import { motion, useReducedMotion } from 'framer-motion'
 import { Menu, Moon, Sun, X } from 'lucide-react'
 import { cn } from '../lib/utils'
 import { useTheme } from '../lib/theme'
+import { useI18n } from '../lib/i18n'
 import { Button } from './Button'
 import { Container } from './Container'
-
-const links = [
-  { href: '#about', label: 'About' },
-  { href: '#services', label: 'Services' },
-  { href: '#contact', label: 'Contact' },
-] as const
 
 function scrollToHash(href: string) {
   const id = href.replace('#', '')
@@ -26,7 +21,22 @@ export function Navbar() {
   const [overHero, setOverHero] = useState(true)
   const { theme, toggleTheme } = useTheme()
 
-  const cta = useMemo(() => ({ href: '#contact', label: 'Request Consultation' }), [])
+  const { lang, dir, setLang, t } = useI18n()
+
+  const links = useMemo(
+    () => [
+      { href: '#about', label: t('nav.about') },
+      { href: '#services', label: t('nav.services') },
+      { href: '#contact', label: t('nav.contact') },
+    ],
+    [t],
+  )
+
+  const cta = useMemo(() => ({ href: '#contact', label: t('nav.requestConsultation') }), [t])
+
+  const toggleLang = useCallback(() => {
+    setLang(lang === 'en' ? 'ar' : 'en')
+  }, [lang, setLang])
 
   useEffect(() => {
     // With OverlayScrollbars, scrolling happens inside its viewport (not window).
@@ -99,7 +109,14 @@ export function Navbar() {
             />
           </a>
 
-          <nav className="hidden items-center gap-7 md:flex" aria-label="Primary">
+          <nav
+            dir={dir}
+            className={cn(
+              'hidden items-center gap-7 md:flex',
+              dir === 'rtl' ? 'text-right' : undefined,
+            )}
+            aria-label="Primary"
+          >
             {links.map((l) => (
               <a
                 key={l.href}
@@ -116,8 +133,17 @@ export function Navbar() {
 
             <button
               type="button"
+              className="inline-flex h-10 items-center justify-center rounded-xl border border-ink-50/10 bg-ink-900/10 hover:bg-ink-900/15 px-3 text-sm font-semibold text-ink-50"
+              aria-label={lang === 'en' ? t('lang.arabic') : t('lang.english')}
+              onClick={toggleLang}
+            >
+              {lang === 'en' ? 'AR' : 'EN'}
+            </button>
+
+            <button
+              type="button"
               className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-ink-50/10 bg-ink-900/10 hover:bg-ink-900/15 text-ink-50"
-              aria-label={theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'}
+              aria-label={theme === 'dark' ? t('nav.switchToLight') : t('nav.switchToDark')}
               onClick={toggleTheme}
             >
               {theme === 'dark' ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
@@ -135,7 +161,7 @@ export function Navbar() {
 
           <button
             className="md:hidden inline-flex h-10 w-10 items-center justify-center rounded-xl border border-ink-50/12 bg-ink-900/10 text-ink-50"
-            aria-label={open ? 'Close menu' : 'Open menu'}
+            aria-label={open ? t('nav.closeMenu') : t('nav.openMenu')}
             aria-controls="mobile-nav"
             onClick={() => setOpen((v) => !v)}
           >
@@ -146,22 +172,43 @@ export function Navbar() {
         {open ? (
           <div className="md:hidden" id="mobile-nav">
             <Container className="pb-4">
-              <div className="mt-2 rounded-2xl border border-white/10 bg-ink-950/80 p-2">
+              <div dir={dir} className="mt-2 rounded-2xl border border-white/10 bg-ink-950/80 p-2">
                 <button
                   type="button"
-                  className="flex w-full items-center justify-between rounded-xl px-4 py-3 text-sm font-semibold text-ink-100 hover:bg-white/5"
+                  className={cn(
+                    'flex w-full items-center justify-between rounded-xl px-4 py-3 text-sm font-semibold text-ink-100 hover:bg-white/5',
+                    dir === 'rtl' ? 'text-right' : undefined,
+                  )}
                   onClick={() => {
                     toggleTheme()
                   }}
                 >
-                  <span>Theme</span>
+                  <span>{t('nav.theme')}</span>
                   {theme === 'dark' ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
                 </button>
+
+                <button
+                  type="button"
+                  className={cn(
+                    'flex w-full items-center justify-between rounded-xl px-4 py-3 text-sm font-semibold text-ink-100 hover:bg-white/5',
+                    dir === 'rtl' ? 'text-right' : undefined,
+                  )}
+                  onClick={() => {
+                    toggleLang()
+                  }}
+                >
+                  <span>{lang === 'en' ? t('lang.arabic') : t('lang.english')}</span>
+                  <span className="text-xs text-ink-300">{lang === 'en' ? 'AR' : 'EN'}</span>
+                </button>
+
                 {links.map((l) => (
                   <a
                     key={l.href}
                     href={l.href}
-                    className="block rounded-xl px-4 py-3 text-sm font-semibold text-ink-100 hover:bg-white/5"
+                    className={cn(
+                      'block rounded-xl px-4 py-3 text-sm font-semibold text-ink-100 hover:bg-white/5',
+                      dir === 'rtl' ? 'text-right' : undefined,
+                    )}
                     onClick={(e) => {
                       e.preventDefault()
                       setOpen(false)
