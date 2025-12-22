@@ -85,17 +85,27 @@ export function Services() {
             const Icon = s.icon
             const from = i % 2 === 0 ? 'left' : 'right'
             return (
-              <ScrollReveal key={s.title} from={from} distance={64} className="[perspective:900px]">
-                <ParallaxCard className="group glass relative overflow-hidden rounded-3xl p-6" intensity={1.05}>
+              <ScrollReveal
+                key={s.title}
+                from={from}
+                distance={64}
+                className="[perspective:900px] flex"
+              >
+                <ParallaxCard
+                  className="group glass relative flex-1 overflow-hidden rounded-3xl p-6 flex flex-col"
+                  intensity={1.05}
+                >
                   <div className="absolute inset-0 -z-10 opacity-0 transition-opacity duration-300 group-hover:opacity-100 bg-[radial-gradient(800px_circle_at_20%_0%,rgba(249,115,22,0.18),transparent_60%)]" />
 
-                  <div className="flex items-start gap-4">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-cyra-500/15 text-cyra-300 border border-white/10">
-                      <Icon className="h-5 w-5" />
-                    </div>
-                    <div>
-                      <h3 className="text-lg font-extrabold tracking-tight">{s.title}</h3>
-                      <p className="mt-2 text-sm leading-relaxed text-ink-200">{s.description}</p>
+                  <div className="flex-1">
+                    <div className="flex items-start gap-4">
+                      <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-cyra-500/15 text-cyra-300 border border-white/10">
+                        <Icon className="h-5 w-5" />
+                      </div>
+                      <div>
+                        <h3 className="text-lg font-extrabold tracking-tight">{s.title}</h3>
+                        <p className="mt-2 text-sm leading-relaxed text-ink-200">{s.description}</p>
+                      </div>
                     </div>
                   </div>
 

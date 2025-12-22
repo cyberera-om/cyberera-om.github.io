@@ -185,8 +185,8 @@ export function Hero() {
                   { k: 'Practical training', v: 'Job‑ready skills' },
                   { k: 'Secure products', v: 'Built to scale' },
                 ].map((item) => (
-                  <div key={item.k} className="[perspective:900px]">
-                    <ParallaxCard className="glass rounded-2xl p-4" intensity={0.9}>
+                  <div key={item.k} className="[perspective:900px] flex">
+                    <ParallaxCard className="glass flex-1 rounded-2xl p-4" intensity={0.9}>
                       <div className="text-sm font-extrabold">{item.k}</div>
                       <div className="mt-1 text-xs text-ink-300">{item.v}</div>
                     </ParallaxCard>

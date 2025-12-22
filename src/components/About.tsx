@@ -15,7 +15,7 @@ const cards = [
   {
     title: 'Our Mission',
     icon: Target,
-    text: 'To protect, train, and enable—through practical services and secure solutions.',
+    text: 'To protect, train, and enable through practical services and secure solutions.',
   },
   {
     title: 'What We Do',
@@ -76,16 +76,16 @@ export function About() {
                 key={c.title}
                 from={from}
                 distance={64}
-                className="[perspective:900px]"
+                className="[perspective:900px] flex"
               >
-                <ParallaxCard className="glass rounded-3xl p-6">
+                <ParallaxCard className="glass flex-1 rounded-3xl p-6 flex flex-col">
                   <div className="flex items-center gap-3">
                     <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-white/5 border border-white/10 text-cyra-300">
                       <Icon className="h-5 w-5" />
                     </div>
                     <h3 className="text-lg font-extrabold">{c.title}</h3>
                   </div>
-                  <p className="mt-3 text-sm leading-relaxed text-ink-200">{c.text}</p>
+                  <p className="mt-3 text-sm leading-relaxed text-ink-200 flex-1">{c.text}</p>
                 </ParallaxCard>
               </ScrollReveal>
             )

@@ -79,8 +79,8 @@ export function Contact() {
         />
 
         <div className="mt-12 grid gap-6 lg:grid-cols-12">
-            <ScrollReveal from="left" distance={64} className="lg:col-span-5">
-              <div className="glass rounded-3xl p-6">
+            <ScrollReveal from="left" distance={64} className="lg:col-span-5 flex">
+              <div className="glass flex-1 rounded-3xl p-6 flex flex-col">
                 <h3 className="text-lg font-extrabold">Contact details</h3>
                 <div className="mt-5 space-y-4 text-sm text-ink-200">
                   <div className="flex gap-3">
@@ -121,12 +121,13 @@ export function Contact() {
                   </div>
                 </div>
 
-                <div className="mt-6 overflow-hidden rounded-2xl border border-white/10">
+                <div className="mt-6 flex-1 overflow-hidden rounded-2xl border border-white/10">
                   <iframe
                     title="Map"
                     src="https://maps.google.com/maps?width=100%25&height=450&hl=en&q=Muscat,%20Oman&t=&z=12&ie=UTF8&iwloc=B&output=embed"
                     width="100%"
-                    height="260"
+                    height="100%"
+                    className="h-full min-h-[260px] w-full"
                     loading="lazy"
                     referrerPolicy="no-referrer-when-downgrade"
                   />
@@ -134,8 +135,8 @@ export function Contact() {
               </div>
             </ScrollReveal>
 
-            <ScrollReveal from="right" distance={64} className="lg:col-span-7">
-              <div className="glass rounded-3xl p-6">
+            <ScrollReveal from="right" distance={64} className="lg:col-span-7 flex">
+              <div className="glass flex-1 rounded-3xl p-6 flex flex-col">
                 <h3 className="text-lg font-extrabold">Send a message</h3>
                 <p className="mt-2 text-sm text-ink-200">
                   Opens your email client. Want a fully automated form (API + spam protection)? We can wire it up.
