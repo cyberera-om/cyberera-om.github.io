@@ -122,9 +122,9 @@ export function Contact() {
                   </div>
                 </div>
 
-                <div className="mt-6 flex-1 overflow-hidden rounded-2xl border border-white/10">
-                  <div className="h-full min-h-[260px] w-full">
-                    <OsmThemeMap className="h-full min-h-[260px] w-full" />
+                <div className="mt-6 flex-1 overflow-hidden rounded-2xl border border-white/10 bg-ink-950">
+                  <div className="h-full min-h-[260px] w-full bg-ink-950">
+                    <OsmThemeMap className="h-full min-h-[260px] w-full bg-ink-950" />
                     <div className="border-t border-white/10 bg-ink-950/40 px-3 py-2 text-[10px] leading-snug text-ink-300">
                       Map data © OpenStreetMap contributors • Tiles © CARTO (dark theme)
                     </div>

@@ -116,6 +116,17 @@
     height: 0 !important;
   }
 
+  /* Leaflet: prevent white fringing on rounded corners while tiles load / anti-alias. */
+  .leaflet-container {
+    background: rgb(var(--ink-950));
+  }
+
+  .leaflet-container .leaflet-pane,
+  .leaflet-container .leaflet-map-pane,
+  .leaflet-container .leaflet-tile-pane {
+    background: transparent;
+  }
+
   ::selection {
     background: rgba(249, 115, 22, 0.35);
   }
