@@ -10,22 +10,22 @@ const cards = [
   {
     title: 'Our Vision',
     icon: Lightbulb,
-    text: 'To be a trusted global partner for cybersecurity, training, and secure digital delivery.',
+    text: "CYRA's vision to become a leading global provider of cybersecurity, professional training, and digital solutions, supporting organisations in building secure, resilient, and future-ready digital capabilities.",
   },
   {
     title: 'Our Mission',
     icon: Target,
-    text: 'To protect, train, and enable through practical services and secure solutions.',
+    text: "CYRA's mission is to empower organisations and individuals through cybersecurity, professional training, and digital solution.",
   },
   {
     title: 'What We Do',
     icon: BadgeCheck,
-    text: 'We assess risk, secure systems, monitor threats, and build capability your team can apply immediately.',
+    text: 'CYRA enable long-term resilience by assessing needs, implementing robust technologies, monitoring performance and threats, and building practical skills that support sustainable digital capability.',
   },
   {
-    title: 'Core Values',
+    title: 'Our Core Values',
     icon: Handshake,
-    text: 'Integrity • Trust • Security-first mindset • Quality • Continuous learning',
+    text: "CYRA's Core Values: Integrity & Trust, Innovation, Quality Excellence, Security-first mindset and Continuous Learning",
   },
 ] as const
 
@@ -62,9 +62,9 @@ export function About() {
 
       <Container>
         <SectionHeading
-          eyebrow="ABOUT CYRA"
-          title="Security. Skills. Delivery."
-          description="We help organization reduce risk, train talent, and ship secure digital products fast, practical, and measurable."
+          eyebrow="ABOUT US"
+          title="Secure, Resilient, Future-Ready"
+          description="CYBER ERA (CYRA) is a global cybersecurity, professional training, and digital solutions company. We combine international best practice with deep technical expertise to support secure, resilient, and future-ready organisations."
         />
 
         <div className="mt-12 grid gap-3 md:grid-cols-2">
@@ -80,7 +80,7 @@ export function About() {
               >
                 <ParallaxCard className="glass flex-1 rounded-3xl p-6 flex flex-col">
                   <div className="flex items-center gap-3">
-                    <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-white/5 border border-white/10 text-cyra-300">
+                    <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white/5 border border-white/10 text-cyra-300">
                       <Icon className="h-5 w-5" />
                     </div>
                     <h3 className="text-lg font-extrabold">{c.title}</h3>

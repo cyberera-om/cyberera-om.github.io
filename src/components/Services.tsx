@@ -10,25 +10,25 @@ const services = [
   {
     title: 'Corporate & Professional Training',
     description:
-      'Certification-aligned programmes with practical, job-ready outcomes.',
+      'CYRA provides professional and corporate training programmes aligned with global certification standards, combining technical depth with practical, job-ready skills.',
     icon: GraduationCap,
   },
   {
     title: 'Cybersecurity Services',
     description:
-      'Assess, harden, monitor, and respond across modern environments.',
+      'CYRA provides end-to-end cybersecurity services to identify vulnerabilities, detect threats, and respond effectively to cyber incidents across complex digital environments.',
     icon: Shield,
   },
   {
     title: 'Software Development',
     description:
-      'Secure-by-design web & mobile builds that scale with your business.',
+      'CYRA designs and delivers secure, scalable digital solutions focused on web and mobile application development, business process automation and secure cloud migration to support enterprise growth.',
     icon: Code2,
   },
   {
     title: 'Managed IT & Cloud Services',
     description:
-      'Proactive support and monitoring for resilient, high-performing systems.',
+      'CYRA delivers managed IT and cloud services that ensure secure, resilient, and high-performing technology environments through proactive support and continuous monitoring.',
     icon: Cloud,
   },
 ] as const
@@ -75,8 +75,8 @@ export function Services() {
 
       <Container>
         <SectionHeading
-          eyebrow="WHAT WE DO"
-          title="Services that move the needle"
+          eyebrow="OUR SERVICES"
+          title="Digital Security & Growth"
           description="Cybersecurity, training, and delivery—built for real-world outcomes."
         />
 
@@ -99,7 +99,7 @@ export function Services() {
 
                   <div className="flex-1">
                     <div className="flex items-start gap-4">
-                      <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-cyra-500/15 text-cyra-300 border border-white/10">
+                      <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-cyra-500/15 text-cyra-300 border border-white/10">
                         <Icon className="h-5 w-5" />
                       </div>
                       <div>

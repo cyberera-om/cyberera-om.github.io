@@ -1,5 +1,6 @@
 import { About } from './components/About'
 import { Contact } from './components/Contact'
+import { Consultation } from './components/Consultation'
 import { Footer } from './components/Footer'
 import { Hero } from './components/Hero'
 import { Navbar } from './components/Navbar'
@@ -28,6 +29,7 @@ export default function App() {
           <Hero />
           <About />
           <Services />
+          <Consultation />
           <Contact />
         </main>
 

@@ -216,7 +216,7 @@ export function Hero() {
                     <div className="text-sm font-semibold text-ink-200">Trusted delivery</div>
                     <div className="mt-1 text-2xl font-extrabold">Secure. Practical. Measurable.</div>
                   </div>
-                  <div className="h-11 w-11 rounded-2xl bg-cyra-500/15 text-cyra-300 flex items-center justify-center">
+                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-cyra-500/15 text-cyra-300">
                     <ShieldCheck className="h-5 w-5" />
                   </div>
                 </div>
