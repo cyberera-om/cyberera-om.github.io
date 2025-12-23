@@ -22,6 +22,20 @@ const DICT: Record<Language, Dict> = {
     'global.loadingSubtitle': 'Preparing the experience. Please wait a moment.',
     'global.loadingFooter': 'Optimizing images & animations • Secure-by-design',
 
+    // Map
+    'map.locateMe': 'Locate me',
+    'map.directions': 'Directions',
+    'map.openExternal': 'Open in Maps',
+    'map.copyCoords': 'Copy coordinates',
+    'map.reset': 'Reset view',
+    'map.clearRoute': 'Clear route',
+    'map.routeSummary': 'Route',
+    'map.copied': 'Copied',
+    'map.geoDenied': 'Location permission denied',
+    'map.geoUnsupported': 'Geolocation not supported',
+    'map.routeFailed': 'Could not build route',
+    'map.you': 'You',
+
     // Navbar
     'nav.about': 'About',
     'nav.services': 'Services',
@@ -155,6 +169,20 @@ const DICT: Record<Language, Dict> = {
     'global.loadingTitle': 'جارٍ التحميل…',
     'global.loadingSubtitle': 'نقوم بتحضير التجربة. يرجى الانتظار قليلاً.',
     'global.loadingFooter': 'تهيئة الصور والحركات • أمانٌ منذ التصميم',
+
+    // Map
+    'map.locateMe': 'تحديد موقعي',
+    'map.directions': 'الاتجاهات',
+    'map.openExternal': 'فتح في الخرائط',
+    'map.copyCoords': 'نسخ الإحداثيات',
+    'map.reset': 'إعادة الضبط',
+    'map.clearRoute': 'مسح المسار',
+    'map.routeSummary': 'المسار',
+    'map.copied': 'تم النسخ',
+    'map.geoDenied': 'تم رفض إذن الموقع',
+    'map.geoUnsupported': 'تحديد الموقع غير مدعوم',
+    'map.routeFailed': 'تعذر إنشاء المسار',
+    'map.you': 'موقعك',
 
     // Navbar
     'nav.about': 'من نحن',
