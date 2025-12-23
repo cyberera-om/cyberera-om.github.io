@@ -225,7 +225,7 @@ const DICT: Record<Language, Dict> = {
     // Services
     'services.eyebrow': 'الخدمات',
     'services.title': 'الأمن الرقمي والنمو',
-    'services.description': 'الأمن السيبراني والتدريب والتنفيذ — بنتائج واقعية.',
+    'services.description': 'الأمن السيبراني والتدريب والتنفيذ - بنتائج واقعية.',
 
     'services.training.title': 'تدريب مهني وتدريب للشركات',
     'services.training.text':
@@ -254,7 +254,7 @@ const DICT: Record<Language, Dict> = {
     // Contact
     'contact.eyebrow': 'اتصل بنا',
     'contact.title': 'تواصل معنا',
-    'contact.description': 'أرسل رسالة سريعة — وسيعود إليك فريقنا قريباً.',
+    'contact.description': 'أرسل رسالة سريعة - وسيعود إليك فريقنا قريباً.',
     'contact.detailsTitle': 'بيانات التواصل',
     'contact.addressLabel': 'العنوان',
     'contact.phoneLabel': 'الهاتف',
