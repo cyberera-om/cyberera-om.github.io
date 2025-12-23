@@ -115,7 +115,7 @@ export function Contact() {
                         <div className="font-semibold text-ink-100">{t('contact.phoneLabel')}</div>
                         <div className={cn('mt-1 w-full space-y-1', dir === 'rtl' ? 'text-left' : undefined)}>
                           <a
-                            className="inline-block hover:text-white [direction:ltr] [unicode-bidi:plaintext]"
+                            className="inline-block hover:text-ink-50 [direction:ltr] [unicode-bidi:plaintext]"
                             dir="ltr"
                             href="tel:+96876886668"
                           >
@@ -123,7 +123,7 @@ export function Contact() {
                           </a>
                           <div>
                             <a
-                              className="inline-block hover:text-white [direction:ltr] [unicode-bidi:plaintext]"
+                              className="inline-block hover:text-ink-50 [direction:ltr] [unicode-bidi:plaintext]"
                               dir="ltr"
                               href="tel:+96891905008"
                             >
@@ -147,7 +147,7 @@ export function Contact() {
                         <div className="font-semibold text-ink-100">{t('contact.emailLabel')}</div>
                         <a
                           className={cn(
-                            'hover:text-white',
+                            'hover:text-ink-50',
                             dir === 'rtl'
                               ? 'inline-block text-left [direction:ltr] [unicode-bidi:plaintext]'
                               : undefined,

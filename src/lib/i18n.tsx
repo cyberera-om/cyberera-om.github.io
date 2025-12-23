@@ -120,7 +120,7 @@ const DICT: Record<Language, Dict> = {
     // Contact
     'contact.eyebrow': 'CONTACT',
     'contact.title': 'Get in touch',
-    'contact.description': 'Send us a quick message—our team will get back to you shortly.',
+    'contact.description': 'Send us a quick message our team will get back to you shortly.',
     'contact.detailsTitle': 'Contact details',
     'contact.addressLabel': 'Address',
     'contact.phoneLabel': 'Phone',
