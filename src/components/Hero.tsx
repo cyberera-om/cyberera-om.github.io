@@ -10,6 +10,7 @@ import {
 import { ArrowLeft, ArrowRight, ShieldCheck, Sparkles, GraduationCap } from 'lucide-react'
 import { fadeUp, stagger } from '../lib/motion'
 import { useI18n } from '../lib/i18n'
+import { useTheme } from '../lib/theme'
 import { cn } from '../lib/utils'
 import { Button } from './Button'
 import { Container } from './Container'
@@ -52,6 +53,9 @@ function scrollToHash(href: string) {
 export function Hero() {
   const reduceMotion = useReducedMotion()
   const [index, setIndex] = useState(0)
+
+  const { theme } = useTheme()
+  const isLightTheme = theme === 'light'
 
   const { t, dir } = useI18n()
   const CtaArrow = dir === 'rtl' ? ArrowLeft : ArrowRight
@@ -117,7 +121,9 @@ export function Hero() {
     <section
       id="hero"
       ref={heroRef}
-      className="force-dark relative min-h-screen overflow-hidden pt-20 text-ink-50 flex items-center"
+      className={cn(
+        'force-dark group relative min-h-screen overflow-hidden pt-20 text-ink-50 flex items-center',
+      )}
     >
       <div className="absolute inset-0">
         <AnimatePresence initial={false}>
@@ -133,14 +139,27 @@ export function Hero() {
             <motion.img
               src={active.image}
               alt="CYRA hero background"
-              className="absolute inset-0 h-full w-full object-cover"
+              className={cn(
+                'absolute inset-0 h-full w-full object-cover transition-[filter] duration-700 ease-out will-change-[filter]',
+                isLightTheme
+                  ? 'filter brightness-[1.06] contrast-[1.02] saturate-[1.04] group-hover:brightness-[1.1]'
+                  : undefined,
+              )}
               loading="eager"
               decoding="async"
               draggable={false}
             />
           </motion.div>
         </AnimatePresence>
-        <div className="absolute inset-0 bg-gradient-to-b from-ink-950/35 via-ink-950/75 to-ink-950" />
+        <div
+          className={cn(
+            'absolute inset-0 bg-gradient-to-b',
+            // In light theme, reveal a bit more of the image while keeping readability.
+            isLightTheme
+              ? 'from-ink-950/20 via-ink-950/60 to-ink-950/95'
+              : 'from-ink-950/35 via-ink-950/75 to-ink-950',
+          )}
+        />
 
         <motion.div
           aria-hidden="true"
