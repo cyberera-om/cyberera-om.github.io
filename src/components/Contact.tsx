@@ -86,44 +86,80 @@ export function Contact() {
             <ScrollReveal from="left" distance={64} className="lg:col-span-5 flex">
               <div className="glass flex-1 rounded-3xl p-6 flex flex-col">
                 <h3 className="text-lg font-extrabold">{t('contact.detailsTitle')}</h3>
-                <div className="mt-5 space-y-4 text-sm text-ink-200">
-                  <div className={cn('flex gap-3', dir === 'rtl' ? 'flex-row-reverse text-right' : undefined)}>
-                    <div className="mt-0.5 text-cyra-300">
-                      <MapPin className="h-5 w-5" />
+                  <div className="mt-5 space-y-4 text-sm text-ink-200">
+                    <div
+                      className={cn(
+                        'flex items-start gap-3',
+                        dir === 'rtl' ? 'flex-row-reverse text-right' : undefined,
+                      )}
+                    >
+                      <div className="mt-0.5 shrink-0 text-cyra-300">
+                        <MapPin className="h-5 w-5" />
+                      </div>
+                      <div className="min-w-0 flex-1">
+                        <div className="font-semibold text-ink-100">{t('contact.addressLabel')}</div>
+                        <div>{t('contact.addressValue')}</div>
+                      </div>
                     </div>
-                    <div>
-                      <div className="font-semibold text-ink-100">{t('contact.addressLabel')}</div>
-                      <div>{t('contact.addressValue')}</div>
+
+                    <div
+                      className={cn(
+                        'flex items-start gap-3',
+                        dir === 'rtl' ? 'flex-row-reverse text-right' : undefined,
+                      )}
+                    >
+                      <div className="mt-0.5 shrink-0 text-cyra-300">
+                        <Phone className="h-5 w-5" />
+                      </div>
+                      <div className="min-w-0 flex-1">
+                        <div className="font-semibold text-ink-100">{t('contact.phoneLabel')}</div>
+                        <div className={cn('mt-1 w-full space-y-1', dir === 'rtl' ? 'text-left' : undefined)}>
+                          <a
+                            className="inline-block hover:text-white [direction:ltr] [unicode-bidi:plaintext]"
+                            dir="ltr"
+                            href="tel:+96876886668"
+                          >
+                              +968 7688 6668
+                          </a>
+                          <div>
+                            <a
+                              className="inline-block hover:text-white [direction:ltr] [unicode-bidi:plaintext]"
+                              dir="ltr"
+                              href="tel:+96891905008"
+                            >
+                              +968 9190 5008
+                            </a>
+                          </div>
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                  <div className={cn('flex gap-3', dir === 'rtl' ? 'flex-row-reverse text-right' : undefined)}>
-                    <div className="mt-0.5 text-cyra-300">
-                      <Phone className="h-5 w-5" />
-                    </div>
-                    <div>
-                      <div className="font-semibold text-ink-100">{t('contact.phoneLabel')}</div>
-                      <a className="hover:text-white" href="tel:+96876886668">
-                        +968 7688 6668
-                      </a>
-                      <div className="mt-1">
-                        <a className="hover:text-white" href="tel:+96891905008">
-                          +968 9190 5008
+
+                    <div
+                      className={cn(
+                        'flex items-start gap-3',
+                        dir === 'rtl' ? 'flex-row-reverse text-right' : undefined,
+                      )}
+                    >
+                      <div className="mt-0.5 shrink-0 text-cyra-300">
+                        <Mail className="h-5 w-5" />
+                      </div>
+                      <div className="min-w-0 flex-1">
+                        <div className="font-semibold text-ink-100">{t('contact.emailLabel')}</div>
+                        <a
+                          className={cn(
+                            'hover:text-white',
+                            dir === 'rtl'
+                              ? 'inline-block text-left [direction:ltr] [unicode-bidi:plaintext]'
+                              : undefined,
+                          )}
+                          dir={dir === 'rtl' ? 'ltr' : undefined}
+                          href="mailto:info@cyra.om"
+                        >
+                          info@cyra.om
                         </a>
                       </div>
                     </div>
                   </div>
-                  <div className={cn('flex gap-3', dir === 'rtl' ? 'flex-row-reverse text-right' : undefined)}>
-                    <div className="mt-0.5 text-cyra-300">
-                      <Mail className="h-5 w-5" />
-                    </div>
-                    <div>
-                      <div className="font-semibold text-ink-100">{t('contact.emailLabel')}</div>
-                      <a className="hover:text-white" href="mailto:info@cyra.om">
-                        info@cyra.om
-                      </a>
-                    </div>
-                  </div>
-                </div>
 
                 <div className="mt-6 flex-1 overflow-hidden rounded-2xl border border-white/10 bg-ink-950">
                   <div className="h-full min-h-[260px] w-full bg-ink-950">

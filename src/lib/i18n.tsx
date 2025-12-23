@@ -18,6 +18,10 @@ const DICT: Record<Language, Dict> = {
     'lang.english': 'English',
     'lang.arabic': 'العربية',
 
+    'global.loadingTitle': 'Loading…',
+    'global.loadingSubtitle': 'Preparing the experience. Please wait a moment.',
+    'global.loadingFooter': 'Optimizing images & animations • Secure-by-design',
+
     // Navbar
     'nav.about': 'About',
     'nav.services': 'Services',
@@ -147,6 +151,10 @@ const DICT: Record<Language, Dict> = {
     // Global
     'lang.english': 'English',
     'lang.arabic': 'العربية',
+
+    'global.loadingTitle': 'جارٍ التحميل…',
+    'global.loadingSubtitle': 'نقوم بتحضير التجربة. يرجى الانتظار قليلاً.',
+    'global.loadingFooter': 'تهيئة الصور والحركات • أمانٌ منذ التصميم',
 
     // Navbar
     'nav.about': 'من نحن',

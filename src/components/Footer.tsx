@@ -31,15 +31,27 @@ export function Footer() {
               <div className="mt-6 space-y-2 text-sm text-ink-100">
                 <div>{t('footer.addressValue')}</div>
                 <div className="flex flex-wrap gap-x-3 gap-y-1">
-                  <a className="hover:text-ink-50 transition-colors" href="mailto:info@cyra.om">
+                  <a
+                    className="hover:text-ink-50 transition-colors text-left [direction:ltr] [unicode-bidi:plaintext]"
+                    dir="ltr"
+                    href="mailto:info@cyra.om"
+                  >
                     info@cyra.om
                   </a>
                   <span className="text-white/20">•</span>
-                  <a className="hover:text-ink-50 transition-colors" href="tel:+96876886668">
+                  <a
+                    className="hover:text-ink-50 transition-colors text-left [direction:ltr] [unicode-bidi:plaintext]"
+                    dir="ltr"
+                    href="tel:+96876886668"
+                  >
                     +968 7688 6668
                   </a>
                   <span className="text-white/20">•</span>
-                  <a className="hover:text-ink-50 transition-colors" href="tel:+96891905008">
+                  <a
+                    className="hover:text-ink-50 transition-colors text-left [direction:ltr] [unicode-bidi:plaintext]"
+                    dir="ltr"
+                    href="tel:+96891905008"
+                  >
                     +968 9190 5008
                   </a>
                 </div>

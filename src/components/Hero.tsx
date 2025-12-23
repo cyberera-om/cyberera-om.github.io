@@ -93,6 +93,7 @@ export function Hero() {
 
   const active = slides[index]
   const Icon = active.icon
+  const titleHasStops = /[.۔]/.test(active.title)
 
   useEffect(() => {
     if (reduceMotion) return
@@ -181,7 +182,12 @@ export function Hero() {
 
               <motion.h1
                 variants={fadeUp}
-                className="mt-5 text-balance text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl"
+                className={cn(
+                  'mt-5 text-balance font-extrabold tracking-tight leading-[1.05]',
+                  titleHasStops
+                    ? 'text-3xl sm:text-4xl lg:text-5xl'
+                    : 'text-4xl sm:text-5xl lg:text-6xl',
+                )}
               >
                 {active.title}
               </motion.h1>
