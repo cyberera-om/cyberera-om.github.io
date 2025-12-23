@@ -8,13 +8,12 @@ import { Navbar } from './components/Navbar'
 import { Services } from './components/Services'
 import { SiteLoader } from './components/SiteLoader'
 import { OverlayScrollbarsComponent } from 'overlayscrollbars-react'
-import { I18nProvider, useI18n } from './lib/i18n'
+import { I18nProvider } from './lib/i18n'
 import { preloadImages } from './lib/preload'
 
 const CRITICAL_IMAGES = ['/logo.png', '/images/bg_1.jpg', '/images/bg_2.jpg', '/images/bg_3.jpg'] as const
 
 function AppShell() {
-  const { t } = useI18n()
   const [ready, setReady] = useState(false)
 
   useEffect(() => {
@@ -49,12 +48,7 @@ function AppShell() {
 
   return (
     <>
-      <SiteLoader
-        show={!ready}
-        title={t('global.loadingTitle')}
-        subtitle={t('global.loadingSubtitle')}
-        footer={t('global.loadingFooter')}
-      />
+      <SiteLoader show={!ready} />
 
       {ready ? (
         <OverlayScrollbarsComponent
